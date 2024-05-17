@@ -1,0 +1,50 @@
+{% include "header.html" %}
+
+{% block styles %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
+    <style>
+        .grand-hotel-regular {
+          font-family: "Grand Hotel", cursive;
+          font-weight: 400;
+          font-style: normal;
+        }
+
+        h1{
+            font-family: 'Grand Hotel';
+        }
+        p{
+            font-family: 'Grand Hotel';
+            font-size: 2em;
+        }
+    </style>
+{% endblock %}
+
+
+<header class="masthead" style="background-image:url('../static/assets/img/city_timelapse.gif') ">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1>Coming Soon</h1>
+          <span class="subheading">We're also so excited.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+
+<div class="container px4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <h1>Hey!</h1>
+            <p>We're currently working on this feature. We will add it very soon.</p>
+        </div>
+
+    </div>
+</div>
+
+{% include "footer.html" %}
