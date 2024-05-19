@@ -1,7 +1,3 @@
-Certainly! Here's the updated and more detailed `README.md` for your GitHub repository:
-
----
-
 # Flask Blog Project
 
 This project is a dynamic web application built using Flask, a lightweight Python web framework. It features user authentication, CRUD (Create, Read, Update, Delete) operations for blog posts, a commenting system, and a contact form for user inquiries via email.
