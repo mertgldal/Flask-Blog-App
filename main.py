@@ -7,15 +7,15 @@ from flask_gravatar import Gravatar
 from models import db, User
 from routes import routes
 from dotenv import load_dotenv
-
+import os
 
 # Load environment variables
 load_dotenv()
 
 # Initialize the app
 app = Flask(__name__)
-app.config['SECRET_KEY'] = secrets.token_hex(16)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_URI', 'sqlite:///posts.db')
 
 # Initialize extensions
 db.init_app(app)
@@ -51,4 +51,4 @@ with app.app_context():
 
 
 if __name__ == "__main__":
-    app.run(debug=False, host='0.0.0.0')
+    app.run(debug=False)
