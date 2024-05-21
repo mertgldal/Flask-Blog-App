@@ -74,7 +74,7 @@ def login():
     if form.validate_on_submit():
         user = db.session.query(User).filter(User.email == form.email.data).first()
         if user and check_password_hash(user.password, form.password.data):
-            login_user(user)
+            login_user(user, remember=form.remember.data)
             next = request.args.get('next')
             return redirect(next or url_for('routes.get_all_posts'))
         else:
@@ -196,6 +196,8 @@ def about():
 
 
 # TODO: Add a user profile page
+# TODO: Add change password mechanism to profile page
+# TODO: When user changes password, should reauthenticate with new password use 'fresh login' for it.
 @routes.route("/profile")
 @login_required
 def profile_page():

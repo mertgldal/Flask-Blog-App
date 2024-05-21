@@ -1,4 +1,3 @@
-import secrets
 from flask import Flask
 from flask_bootstrap import Bootstrap5
 from flask_ckeditor import CKEditor
@@ -8,6 +7,7 @@ from models import db, User
 from routes import routes
 from dotenv import load_dotenv
 import os
+from datetime import timedelta
 
 # Load environment variables
 load_dotenv()
@@ -16,6 +16,7 @@ load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_URI', 'sqlite:///posts.db')
+app.config['REMEMBER_COOKIE_DURATION'] = timedelta(days=7)
 
 # Initialize extensions
 db.init_app(app)
@@ -34,6 +35,8 @@ gravatar = Gravatar(app,
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'routes.login'
+login_manager.refresh_view = 'routes.login'
+login_manager.needs_refresh_message = 'Your password successfully changed.'
 
 
 @login_manager.user_loader

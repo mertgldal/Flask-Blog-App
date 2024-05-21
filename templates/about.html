@@ -1,47 +1,76 @@
 {% include "header.html" %}
 
+{% block styles %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+
+        .montserrat-my_font {
+          font-family: "Montserrat", sans-serif;
+          font-optical-sizing: auto;
+          font-weight: 200;
+          font-style: normal;
+        }
+        p{
+            font-family: 'my_font';
+            font-size: 1em;
+        }
+    </style>
+{% endblock %}
+
+
 <!-- Page Header-->
 <header
-  class="masthead"
-  style="background-image: url('../static/assets/img/about-bg.jpg')"
+        class="masthead"
+        style="background-image: url('../static/assets/img/about-bg.jpg')"
 >
-  <div class="container position-relative px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-7">
-        <div class="page-heading">
-          <h1>About Me</h1>
-          <span class="subheading">This is what I do.</span>
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>About Me</h1>
+                    <span class="subheading">This is what I do.</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 <!-- Main Content-->
 <main class="mb-4">
-  <div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-7">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe
-          nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis
-          sit soluta odio, adipisci quas excepturi maxime quae totam ducimus
-          consectetur?
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
-          praesentium recusandae illo eaque architecto error, repellendus iusto
-          reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in
-          officia voluptas voluptatibus, minus!
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut
-          consequuntur magnam, excepturi aliquid ex itaque esse est vero natus
-          quae optio aperiam soluta voluptatibus corporis atque iste neque sit
-          tempora!
-        </p>
-      </div>
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p>
+                    Welcome to my blog! I'm Mert Güldal, a penultimate-year Computer Science student at WSB University,
+                    with a deep passion for software development and data science. My journey in tech has been driven by
+                    curiosity and a desire to create impactful solutions.
+                </p>
+                <p>
+                    This blog is a testament to my full-stack development skills, featuring a variety of projects such
+                    as a
+                    full-stack blog application, a Pokedex API, and a Flight Deals Notifier.
+                    Each project showcases my proficiency in Python, Flask, SQLAlchemy, and other tools.
+                </p>
+                <p>
+                    When I'm not coding, I love watching TV shows, playing chess
+                    (<a href="https://www.chess.com/member/mgczestochowa" target="_blank"
+                        style="text-decoration:None">♖</a>),
+                    playing video games(<a href="https://steamcommunity.com/profiles/76561198197443189/"
+                                           target="_blank"><i class="fa-brands fa-steam"></i></a>)
+                    with my friends. In my downtime, you can find me trekking or cycling. I'm also a huge fan of
+                    strategy games,
+                    which help me unwind and think critically.
+                </p>
+                <p>
+                    Through this blog, I aim to share my experiences, projects, and insights into the world of software
+                    development and data science.Join me on this journey as I explore the endless possibilities that
+                    technology has to offer!
+                </p>
+            </div>
+
+        </div>
     </div>
-  </div>
 </main>
 
 {% include "footer.html" %}
