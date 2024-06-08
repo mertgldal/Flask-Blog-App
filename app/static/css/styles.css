@@ -10847,6 +10847,31 @@ header.masthead .post-heading .meta a {
   font-family:verdana;
   font-size:13px;
 }
+/*
+.profileImage {
+  width:50px;
+  margin-right:5px;
+  height:50px;
+  float:inherit;
+}
+.profileImage img {
+  width:100%;
+  border-radius:50%;
+}
+*/
+.profileImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Optional: add some space at the top */
+  width: 100%; /* Ensure it takes the full width of the card */
+}
+
+.profileImage img {
+  width: 50px; /* Maintain the specific width */
+  height: 50px; /* Maintain the specific height */
+  border-radius: 50%;
+}
 
 /* Flash Message Styling */
 .flash {

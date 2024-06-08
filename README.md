@@ -2,6 +2,8 @@
 
 This project is a dynamic web application built using Flask, a lightweight Python web framework. It features user authentication, CRUD (Create, Read, Update, Delete) operations for blog posts, a commenting system, and a contact form for user inquiries via email.
 
+[Project link](https://flask-blog-app-1-r3sx.onrender.com/)
+
 ## Features
 
 - **User Authentication:** Secure registration, login, and logout functionality.
@@ -115,9 +117,9 @@ This project is a dynamic web application built using Flask, a lightweight Pytho
 - **.env:** Environment variables for sensitive information.
 
 ## TODO
-- **Add a user profile page
-- **Add comment editing functionality
-- **Add reply functionality to comments
+- Add a user profile page
+- Add comment editing functionality
+- Add reply functionality to comments
 
 ## Contributing
 
