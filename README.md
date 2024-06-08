@@ -11,6 +11,7 @@ This project is a dynamic web application built using Flask, a lightweight Pytho
 - **Commenting System:** Users can add comments to blog posts.
 - **Contact Form:** Allows users to send messages via email.
 - **Admin Role:** Special privileges for the admin to manage all blog posts and comments.
+- **Profile Page:** Users can view and update their profile, including changing their password.
 - **Flask Extensions:** Utilizes SQLAlchemy for ORM, Flask-Bootstrap for responsive design, CKEditor for rich text editing, and Flask-Gravatar for user avatars.
 
 ## Technologies Used
@@ -52,7 +53,7 @@ This project is a dynamic web application built using Flask, a lightweight Pytho
 5. **Create the database:**
    ```bash
    flask shell
-   >>> from models import db
+   >>> from my_flask_app.extensions import db
    >>> db.create_all()
    >>> exit()
    ```
@@ -71,6 +72,7 @@ This project is a dynamic web application built using Flask, a lightweight Pytho
 - **Create/Edit/Delete Post:** After logging in, create new posts or edit/delete existing ones.
 - **Comments:** Add comments to posts.
 - **Contact:** Use the contact form to send an email message.
+- **Profile Page:** View and update your profile, including changing your password.
 
 ## Admin Role
 
@@ -83,41 +85,66 @@ This project is a dynamic web application built using Flask, a lightweight Pytho
 ## Application Structure
 
 ```plaintext
-.
-├── .venv                   # Virtual environment
-├── main.py                 # Main application file
-├── models.py               # Database models
-├── routes.py               # Application routes
-├── forms.py                # Forms for user input
-├── templates               # HTML templates
-│   ├── base.html
-│   ├── index.html
-│   ├── register.html
-│   ├── login.html
-│   ├── post.html
-│   ├── make-post.html
-│   ├── about.html
-│   ├── contact.html
-│   ├── coming-soon.html
-│   ├── header.html
-│   └── footer.html
-├── static                  # Static files (CSS, JS, images)
-│   ├── css
-│   └── js
-├── .env                    # Environment variables
-└── README.md               # Project documentation
+my_flask_app/
+├── my_flask_app/
+│   ├── __init__.py
+│   ├── blueprints/
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── user.py
+│   │   ├── blogpost.py
+│   │   ├── comment.py
+│   ├── forms/
+│   │   ├── __init__.py
+│   │   ├── post_form.py
+│   │   ├── user_form.py
+│   │   ├── comment_form.py
+│   │   ├── contact_form.py
+│   ├── templates/
+│   │   ├── about.html
+│   │   ├── contact.html
+│   │   ├── index.html
+│   │   ├── login.html
+│   │   ├── make-post.html
+│   │   ├── post.html
+│   │   ├── profile-page.html
+│   │   ├── register.html
+│   ├── static/
+│   │   ├── css/
+│   │   ├── js/
+│   │   ├── images/
+│   ├── extensions.py
+│   ├── config.py
+│   ├── main.py
+├── migrations/
+├── tests/
+│   ├── __init__.py
+│   ├── test_routes.py
+│   ├── test_models.py
+├── .env
+├── .flaskenv
+├── requirements.txt
+├── README.md
 ```
 
-- **main.py:** The main application script.
-- **models.py:** Contains SQLAlchemy models for User, BlogPost, and Comment.
-- **routes.py:** Defines the routes/endpoints for the application.
-- **forms.py:** Defines WTForms for user registration, login, post creation, and comments.
-- **templates/:** Contains HTML templates for different routes.
-- **static/:** Contains static files such as CSS and JavaScript.
+- **my_flask_app/__init__.py:** Initializes the Flask application and its extensions.
+- **my_flask_app/blueprints/routes.py:** Defines the routes/endpoints for the application.
+- **my_flask_app/models/:** Contains SQLAlchemy models for User, BlogPost, and Comment.
+- **my_flask_app/forms/:** Defines WTForms for user registration, login, post creation, comments, and contact.
+- **my_flask_app/templates/:** Contains HTML templates for different routes.
+- **my_flask_app/static/:** Contains static files such as CSS and JavaScript.
+- **my_flask_app/extensions.py:** Initializes Flask extensions.
+- **my_flask_app/config.py:** Configuration settings for the Flask application.
+- **my_flask_app/main.py:** The main application script.
+- **migrations/:** Database migration files.
+- **tests/:** Unit tests for the application.
 - **.env:** Environment variables for sensitive information.
+- **requirements.txt:** Lists the project's dependencies.
+- **README.md:** Project documentation.
 
 ## TODO
-- Add a user profile page
 - Add comment editing functionality
 - Add reply functionality to comments
 
@@ -133,4 +160,4 @@ Please fork the repository and use a feature branch for your contributions.
 
 ## Contact
 
-For any questions or issues, please contact [mertguldal@outlook.com](mailto:mertguldal@outlook.com).
+For any questions or issues, please contact [ASK ME VIA EMAIL](mailto:mertguldal@outlook.com).
