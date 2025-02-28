@@ -2,8 +2,6 @@
 
 This project is a dynamic web application built using Flask, a lightweight Python web framework. It features user authentication, CRUD (Create, Read, Update, Delete) operations for blog posts, a commenting system, and a contact form for user inquiries via email.
 
-[Project link](https://flask-blog-app-1-r3sx.onrender.com/)
-
 ## Features
 
 - **User Authentication:** Secure registration, login, and logout functionality.
@@ -20,49 +18,6 @@ This project is a dynamic web application built using Flask, a lightweight Pytho
 - **Frontend:** Flask-Bootstrap, CKEditor
 - **Extensions:** Flask-Login, Flask-WTF, Flask-Gravatar
 - **Email:** smtplib, dotenv for environment variable management
-
-## Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
-   cd your-repo-name
-   ```
-
-2. **Create and activate a virtual environment:**
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
-
-3. **Install the dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Set up environment variables:**
-   Create a `.env` file in the root directory of the project and add your environment variables:
-   ```
-   SECRET_KEY=your_secret_key
-   SQLALCHEMY_DATABASE_URI=sqlite:///posts.db
-   contact_email=your_email@example.com
-   contact_email_pwd=your_email_password
-   contact_mailbox=recipient_email@example.com
-   ```
-
-5. **Create the database:**
-   ```bash
-   flask shell
-   >>> from my_flask_app.extensions import db
-   >>> db.create_all()
-   >>> exit()
-   ```
-
-6. **Run the application:**
-   ```bash
-   flask run
-   ```
-   Access the application in your web browser at `http://localhost:5000`.
 
 ## Usage
 
@@ -147,6 +102,7 @@ my_flask_app/
 ## TODO
 - Add comment editing functionality
 - Add reply functionality to comments
+- Add profile page
 
 ## Contributing
 
@@ -160,4 +116,4 @@ Please fork the repository and use a feature branch for your contributions.
 
 ## Contact
 
-For any questions or issues, please contact [ASK ME VIA EMAIL](mailto:mertguldal@outlook.com).
+For any questions or issues, please [contact me](mailto:mertguldal@outlook.com).
