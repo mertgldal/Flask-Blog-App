@@ -1,0 +1,51 @@
+{
+  "blog_post": [
+    {
+      "id": 1,
+      "author": {
+        "id": 1,
+        "username": "MG",
+        "email": "mg@admin.com",
+        "password": "pbkdf2:sha256:600000$jmAHcnfN$06bdaaa85551a183db8f8b28357f9fb18fd4f6d12aafc5c14c383da3ab73083f"
+      },
+      "title": "Finding Serenity in Life's Uncertainties",
+      "subtitle": "Finding Serenity in Life's Uncertainties'",
+      "date": "May 02, 2024",
+      "body": "<p>In a world that often seems meticulously planned and orderly, there&#39;s an undeniable allure to embracing chaos. It&#39;s the unexpected detours, the spontaneous moments, and the unplanned adventures that add color to the canvas of our lives. Yet, amidst the chaos, there&#39;s a subtle beauty waiting to be discovered&mdash;a serenity that can only be found when we learn to dance with uncertainty.</p>",
+      "img_url": "https://images.unsplash.com/photo-1541448417793-dc0917a12e60?q=80&w=2013&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "comments": [
+        {
+          "id": 3,
+          "user": {
+            "id": 2,
+            "username": "mert",
+            "email": "mert@example.com"
+          },
+          "content": "Hey!",
+          "date": "May 02, 2024, 10:21 AM"
+        },
+        {
+          "id": 9,
+          "user": {
+            "id": 1,
+            "username": "MG",
+            "email": "mg@admin.com"
+          },
+          "content": "hehey",
+          "date": "May 29, 2024, 9:20 AM"
+        },
+        {
+          "id": 7,
+          "user": {
+            "id": 2,
+            "username": "mert",
+            "email": "mert@example.com"
+          },
+          "content": "Hello world",
+          "date": "May 03, 2024, 10:21 AM"
+        }
+      ]
+    }
+  ]
+
+}
