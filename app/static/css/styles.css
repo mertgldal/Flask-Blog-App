@@ -10878,3 +10878,59 @@ header.masthead .post-heading .meta a {
   color: #ee6f57;
   text-align: center;
 }
+
+
+/* Dark Mode Tema */
+.dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+
+/* Navbar */
+.dark-mode .navbar {
+  background-color: #1e1e1e !important;
+}
+
+.dark-mode .navbar a {
+  color: #ffffff !important;
+}
+
+/* İçerik Alanı */
+.dark-mode .card,
+.dark-mode .jumbotron {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #333 !important;
+}
+
+/* Footer */
+.dark-mode footer {
+  background-color: #1e1e1e !important;
+}
+
+/* Linkler */
+.dark-mode a {
+  color: #dfc2c4 !important;
+}
+
+.dark-mode a:hover {
+  color: #ffcc00 !important;
+}
+
+/* Dark Mode Butonu */
+#darkModeToggle {
+  margin-top: 5px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  background: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#darkModeToggle:hover {
+  background: #444;
+}
+
+

@@ -8,6 +8,98 @@
             display: None;
         }
     </style>
+    <style>
+        label {
+            display: None;
+        }
+
+        .form-check-label {
+            display: inline-block;
+            font: 0.9em "Fira Sans", sans-serif;
+        }
+
+        /* Dark Mode'da genel stil */
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+
+        /* Dark Mode için Login Formu */
+
+        /* Dark Mode'da input alanlarının stili */
+        body.dark-mode .form-control {
+            background-color: #333;
+            color: white;
+            border: 1px solid #444;
+        }
+
+        body.dark-mode .form-control:focus {
+            background-color: #444;
+            color: white;
+            border-color: #666;
+        }
+
+        /* Dark Mode'da button stili */
+        body.dark-mode .btn {
+            background-color: #444;
+            color: white;
+            border: 1px solid #666;
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        /* Dark Mode'da alert mesajları */
+        body.dark-mode .alert {
+            background-color: #444;
+            color: white;
+        }
+
+        /* Light Mode'da varsayılan stil (dark mode olmadığı durum) */
+
+
+        /* Light Mode'da input alanlarının varsayılan stili */
+        body:not(.dark-mode) .form-control {
+            background-color: #ffffff;
+            color: #000000;
+            border: 1px solid #ccc;
+        }
+
+        body:not(.dark-mode) .form-control:focus {
+            background-color: #f8f8f8;
+            color: #000000;
+            border-color: #007bff;
+        }
+
+        /* Light Mode'da button stili */
+        body:not(.dark-mode) .btn {
+            background-color: #007bff;
+            color: white;
+            border: 1px solid #0056b3;
+        }
+
+        body:not(.dark-mode) .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Light Mode'da alert mesajları */
+        body:not(.dark-mode) .alert {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Başlıkların stili */
+        .masthead {
+            background-color: #ffffff;
+        }
+
+        /* Subheading rengi */
+        .subheading {
+            color: #555;
+        }
+    </style>
 {% endblock %}
 
 

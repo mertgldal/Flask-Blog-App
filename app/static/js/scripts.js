@@ -27,3 +27,29 @@ window.addEventListener('DOMContentLoaded', () => {
         scrollPos = currentTop;
     });
 })
+document.addEventListener("DOMContentLoaded", function () {
+  const darkModeToggle = document.getElementById("darkModeToggle");
+  const body = document.body;
+
+  // Kayıtlı Modu Yükle
+  if (localStorage.getItem("darkMode") === "enabled") {
+    body.classList.add("dark-mode");
+    darkModeToggle.textContent = "🌞 Light Mode";  // Dark mode açıldığında metni değiştir
+  } else {
+    darkModeToggle.textContent = "🌙 Dark Mode";  // Default olarak light mode göster
+  }
+
+  // Dark Mode Toggle Butonu
+  darkModeToggle.addEventListener("click", function () {
+    body.classList.toggle("dark-mode");
+
+    // Durumu LocalStorage'a Kaydet
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("darkMode", "enabled");
+      darkModeToggle.textContent = "🌞 Light Mode";  // Dark mode açıldığında metni değiştir
+    } else {
+      localStorage.setItem("darkMode", "disabled");
+      darkModeToggle.textContent = "🌙 Dark Mode";  // Dark mode kapandığında metni değiştir
+    }
+  });
+});
