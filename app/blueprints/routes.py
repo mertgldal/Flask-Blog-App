@@ -13,11 +13,17 @@ from app.forms.contact_form import ContactForm
 from functools import wraps
 import smtplib
 import os
+from transformers import pipeline
 
 routes = Blueprint("routes", __name__)
 contact_email = os.getenv("contact_email")
 contact_email_pwd = os.getenv("contact_email_pwd")
 contact_mailbox = os.getenv("contact_mailbox")
+
+summarizer = pipeline("summarization")
+# summarizer = pipeline("summarization", framework="pt")
+# summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6", framework="pt")
+
 
 
 def is_user_authenticated(func):
@@ -104,6 +110,28 @@ def get_all_posts():
     result = db.session.execute(db.select(BlogPost))
     posts = result.scalars().all()
     return render_template("index.html", all_posts=posts)
+
+
+@routes.route("/generate-summary/<int:post_id>", methods=["GET", "POST"])
+@login_required
+@is_user_admin
+def generate_summary(post_id):
+    post = db.get_or_404(BlogPost, post_id)
+
+    if len(post.body) < 50:
+        flash("Post content is too short for summarization.", "warning")
+        return redirect(url_for(endpoint="routes.get_all_posts"))
+
+    try:
+        summary_result = summarizer(post.body, max_length=80, min_length=30, do_sample=False)
+        summary_text = summary_result[0]['summary_text']
+        post.summary = summary_text
+        db.session.commit()
+        flash("Summary generated and saved!", "success")
+    except Exception as e:
+        flash(f"Failed to generate summary: {e}", "danger")
+
+    return redirect(url_for(endpoint="routes.get_all_posts"))
 
 
 @routes.route("/post/<int:post_id>", methods=["GET", "POST"])

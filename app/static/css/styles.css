@@ -10934,3 +10934,58 @@ header.masthead .post-heading .meta a {
 }
 
 
+
+/* ========================================= */
+/* Admin Buton Renklerini Zorlama Stilleri   */
+/* ========================================= */
+
+/* Sadece .admin-actions içindeki butonları hedefler */
+
+/* --- Primary (Mavi) Buton --- */
+.admin-actions .btn.btn-primary {
+  background-color: #0d6efd !important; /* Bootstrap 5 - Primary Background */
+  border-color: #0d6efd !important;     /* Bootstrap 5 - Primary Border */
+  color: #fff !important;               /* Metin Rengi - Beyaz */
+}
+
+.admin-actions .btn.btn-primary:hover,
+.admin-actions .btn.btn-primary:focus { /* hover ve focus durumları */
+  background-color: #0b5ed7 !important; /* Koyu Mavi */
+  border-color: #0a58ca !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5) !important; /* Bootstrap focus efekti */
+}
+
+/* --- Warning (Sarı) Buton --- */
+.admin-actions .btn.btn-warning {
+  background-color: #ffc107 !important; /* Bootstrap 5 - Warning Background */
+  border-color: #ffc107 !important;     /* Bootstrap 5 - Warning Border */
+  color: #000 !important;               /* Metin Rengi - Siyah */
+}
+
+.admin-actions .btn.btn-warning:hover,
+.admin-actions .btn.btn-warning:focus { /* hover ve focus durumları */
+  background-color: #ffca2c !important; /* Koyu Sarı */
+  border-color: #ffc720 !important;
+  color: #000 !important;
+  box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.5) !important; /* Bootstrap focus efekti */
+}
+
+/* --- Danger (Kırmızı) Buton --- */
+.admin-actions .btn.btn-danger {
+  background-color: #dc3545 !important; /* Bootstrap 5 - Danger Background */
+  border-color: #dc3545 !important;     /* Bootstrap 5 - Danger Border */
+  color: #fff !important;               /* Metin Rengi - Beyaz */
+}
+
+.admin-actions .btn.btn-danger:hover,
+.admin-actions .btn.btn-danger:focus { /* hover ve focus durumları */
+  background-color: #bb2d3b !important; /* Koyu Kırmızı */
+  border-color: #b02a37 !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 0.25rem rgba(225, 83, 97, 0.5) !important; /* Bootstrap focus efekti */
+}
+
+/* ========================================= */
+
+
