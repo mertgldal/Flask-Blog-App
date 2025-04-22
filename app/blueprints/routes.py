@@ -21,9 +21,6 @@ contact_email_pwd = os.getenv("contact_email_pwd")
 contact_mailbox = os.getenv("contact_mailbox")
 
 summarizer = pipeline("summarization")
-# summarizer = pipeline("summarization", framework="pt")
-# summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6", framework="pt")
-
 
 
 def is_user_authenticated(func):
@@ -40,7 +37,7 @@ def is_user_authenticated(func):
     return wrapped
 
 
-def is_user_admin(func):
+def admin_required(func):
     @wraps(func)
     def wrapped(*args, **kwargs):
         if current_user.get_id() == "1":
@@ -114,7 +111,7 @@ def get_all_posts():
 
 @routes.route("/generate-summary/<int:post_id>", methods=["GET", "POST"])
 @login_required
-@is_user_admin
+@admin_required
 def generate_summary(post_id):
     post = db.get_or_404(BlogPost, post_id)
 
@@ -182,7 +179,7 @@ def edit_comment():
 
 @routes.route("/new-post", methods=["GET", "POST"])
 @login_required
-@is_user_admin
+@admin_required
 def add_new_post():
     form = CreatePostForm()
     if form.validate_on_submit():
@@ -202,7 +199,7 @@ def add_new_post():
 
 @routes.route("/edit-post/<int:post_id>", methods=["GET", "POST"])
 @login_required
-@is_user_admin
+@admin_required
 def edit_post(post_id):
     post = db.get_or_404(BlogPost, post_id)
     edit_form = CreatePostForm(obj=post)
@@ -218,7 +215,7 @@ def edit_post(post_id):
 
 @routes.route("/delete-post/<int:post_id>")
 @login_required
-@is_user_admin
+@admin_required
 def delete_post(post_id):
     post = db.get_or_404(BlogPost, post_id)
     db.session.delete(post)
@@ -264,3 +261,10 @@ def profile_page(user_id):
         else:
             flash("Invalid current password", "danger")
     return render_template("profile-page.html", user=user, form=change_password_form)
+
+
+@routes.route("/admin/dashboard", methods=['GET', 'POST'])
+@login_required
+@admin_required
+def admin_dashboard():
+    return render_template('admin_dashboard.html')

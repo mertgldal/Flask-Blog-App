@@ -13,6 +13,5 @@ class BlogPost(db.Model):
     author = db.relationship("User", back_populates="posts")
     comments = db.relationship("Comment", back_populates="post")
 
-
-    # New feauture for summary with AI
+    # New feature for summary with AI
     summary = db.Column(db.Text, nullable=True)
