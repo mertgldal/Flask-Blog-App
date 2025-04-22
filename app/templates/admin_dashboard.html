@@ -1,0 +1,117 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Admin Dashboard</h2>
+
+  <!-- Dashboard Summary -->
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="card text-white bg-primary">
+        <div class="card-body">
+          <h5 class="card-title">Total Users</h5>
+          <p class="card-text">{{ users|length }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-white bg-success">
+        <div class="card-body">
+          <h5 class="card-title">Total Blog Posts</h5>
+          <p class="card-text">{{ posts|length }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-white bg-warning">
+        <div class="card-body">
+          <h5 class="card-title">Avg Read Time</h5>
+          <p class="card-text">{{ avg_read_time|round(2) }} mins</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Users Table -->
+  <h4>Users</h4>
+  <table class="table table-striped mb-5">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Update Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <form method="POST" action="{{ url_for('admin.update_role', user_id=user.id) }}">
+            <select name="new_role" class="form-select form-select-sm" onchange="this.form.submit()">
+              <option disabled selected>Change</option>
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Blog Posts Table -->
+  <h4>Blog Posts</h4>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Views</th>
+        <th>Avg Read Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in posts %}
+      <tr>
+        <td>{{ post.title }}</td>
+        <td>{{ post.author.email }}</td>
+        <td>{{ post.view_count }}</td>
+        <td>{{ post.read_time }} mins</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Chart.js for Visual Stats -->
+  <div class="mt-5">
+    <h4>Top 5 Most Viewed Posts</h4>
+    <canvas id="viewsChart" width="400" height="150"></canvas>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('viewsChart').getContext('2d');
+  const chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: {{ top_titles|tojson }},
+      datasets: [{
+        label: 'Views',
+        data: {{ top_views|tojson }},
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+</script>
+{% endblock %}
+

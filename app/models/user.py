@@ -10,3 +10,15 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100), nullable=False)
     posts = db.relationship("BlogPost", back_populates="author")
     comments = db.relationship("Comment", back_populates="author")
+
+    # Adding admin role to db
+    role = db.Column(db.String(50), nullable=False, default="user", server_default="user")
+
+    @property
+    def is_admin(self):
+        return self.role == 'admin'
+
+    # TODO: Add new roles
+    # @property
+    # def is_moderator(self):
+    #     return self.role == 'moderator'
