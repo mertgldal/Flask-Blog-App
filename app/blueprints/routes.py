@@ -1,5 +1,5 @@
 import datetime
-from flask import Blueprint, render_template, redirect, url_for, flash, request, abort
+from flask import Blueprint, render_template, redirect, url_for, flash, request, abort, session
 from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.extensions import db, gravatar
@@ -14,6 +14,10 @@ from functools import wraps
 import smtplib
 import os
 from transformers import pipeline
+from collections import Counter
+from datetime import datetime, timedelta
+
+
 
 routes = Blueprint("routes", __name__)
 contact_email = os.getenv("contact_email")
@@ -40,7 +44,7 @@ def is_user_authenticated(func):
 def admin_required(func):
     @wraps(func)
     def wrapped(*args, **kwargs):
-        if current_user.get_id() == "1":
+        if current_user.role == "admin":
             return func(*args, **kwargs)
         return abort(403)
 
@@ -133,11 +137,19 @@ def generate_summary(post_id):
 
 @routes.route("/post/<int:post_id>", methods=["GET", "POST"])
 @login_required
-def show_post(post_id):
-    requested_post = db.get_or_404(BlogPost, post_id)
+def view_post(post_id):
+    post = db.get_or_404(BlogPost, post_id)
     user = current_user
     form = CommentForm()
-    comments = requested_post.comments
+    comments = post.comments
+
+    # Only count unique views per session
+    viewed_post = session.get('viewed_post', [])
+    if post_id not in viewed_post:
+        post.views += 1
+        db.session.commit()
+        viewed_post.append(post_id)
+        session["viewed_post"] = viewed_post
     if form.validate_on_submit():
         new_comment = Comment(
             comment=form.comment.data,
@@ -149,15 +161,15 @@ def show_post(post_id):
         db.session.commit()
         return redirect(
             url_for(
-                "routes.show_post",
-                post_id=requested_post.id,
+                "routes.view_post",
+                post_id=post.id,
                 form=form,
                 comments=comments,
                 avatar=gravatar,
             )
         )
     return render_template(
-        "post.html", post=requested_post, form=form, comments=comments, avatar=gravatar
+        "post.html", post=post, form=form, comments=comments, avatar=gravatar
     )
 
 
@@ -168,7 +180,7 @@ def delete_comment(comment_id):
     comment = db.get_or_404(Comment, comment_id)
     db.session.delete(comment)
     db.session.commit()
-    return redirect(url_for("routes.show_post", post_id=post_id))
+    return redirect(url_for("routes.view_post", post_id=post_id))
 
 
 @routes.route("/edit-comment")
@@ -182,7 +194,9 @@ def edit_comment():
 @admin_required
 def add_new_post():
     form = CreatePostForm()
+
     if form.validate_on_submit():
+        word_count = len(form.body.data.split())
         new_post = BlogPost(
             title=form.title.data,
             subtitle=form.subtitle.data,
@@ -190,6 +204,7 @@ def add_new_post():
             img_url=form.img_url.data,
             author=current_user,
             date=datetime.date.today().strftime("%B %d, %Y"),
+            avg_read_time=round(word_count / 100, 2),
         )
         db.session.add(new_post)
         db.session.commit()
@@ -209,7 +224,7 @@ def edit_post(post_id):
         post.img_url = edit_form.img_url.data
         post.body = edit_form.body.data
         db.session.commit()
-        return redirect(url_for("routes.show_post", post_id=post.id))
+        return redirect(url_for("routes.view_post", post_id=post.id))
     return render_template("make-post.html", form=edit_form)
 
 
@@ -263,8 +278,61 @@ def profile_page(user_id):
     return render_template("profile-page.html", user=user, form=change_password_form)
 
 
-@routes.route("/admin/dashboard", methods=['GET', 'POST'])
+# Route to update user role
+@routes.route('/admin/update-role/<int:user_id>', methods=['POST'])
+@login_required
+@admin_required
+def update_user_role(user_id):
+    new_role = request.form.get('new_role')
+    user = User.query.get(user_id)
+    if user:
+        if new_role in ['user', 'admin']:
+            user.role = new_role
+            db.session.commit()
+            flash(f"Role updated for {user.username} to {new_role}.")
+        else:
+            flash(f"Invalid role value sent: {new_role}", "warning")
+    else:
+        flash(f"User not found (ID: {user_id}).", "error")
+    return redirect(url_for('routes.admin_dashboard'))
+
+
+@routes.route('/admin/dashboard')
 @login_required
 @admin_required
 def admin_dashboard():
-    return render_template('admin_dashboard.html')
+    users = User.query.all()
+    posts = BlogPost.query.all()
+
+    top_posts = sorted(posts, key=lambda p: p.views, reverse=True)[:5]
+    top_titles = [post.title for post in top_posts]
+    top_views = [post.views for post in top_posts]
+
+    stats = {
+        'total_users': len(users),
+        'total_posts': len(posts),
+        'avg_read_time': round(sum(p.avg_read_time for p in posts) / len(posts), 2) if posts else 0
+    }
+
+    return render_template(
+        "admin_dashboard.html",
+        users=users,
+        posts=posts,
+        stats=stats,
+        top_titles=top_titles,
+        top_views=top_views
+    )
+
+
+# Route to delete a user
+@routes.route('/admin/delete-user', methods=['POST'])
+@login_required
+@admin_required
+def delete_user():
+    user_id = request.form.get('user_id')
+    user = User.query.get(user_id)
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        flash(f"Deleted user {user.name}.")
+    return redirect(url_for('admin_dashboard'))

@@ -145,9 +145,10 @@
                                 <img class="commenterImage" src={{ user.email | gravatar }}>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Hey {{ user.username }}</h5>
-                                <p class="card-text">{{ user.email }}</p>
-                                <p class="card-text">{{ user.email }}</p>
+                                <h5 class="card-title">Hey <i>{{ user.username }}</i></h5>
+                                <p class="card-text"><b>Email address: </b>{{ user.email }}</p>
+                                <p class="card-text"><b>Role: </b>{{ user.role.capitalize() }}</p>
+
                             </div>
                         </div>
                         <div class="card">
@@ -157,7 +158,17 @@
                         </div>
                     </div>
                 {% else %}
+                    <div class="card">
+                            <div class="profileImage">
+                                <img class="commenterImage" src={{ user.email | gravatar }}>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"><b>Username: </b><i>{{ user.username }}</i></h5>
+                                <p class="card-text"><b>Email address: </b>{{ user.email }}</p>
+                                <p class="card-text"><b>Role: </b>{{ user.role.capitalize() }}</p>
 
+                            </div>
+                        </div>
                 {% endif %}
             </div>
         </div>

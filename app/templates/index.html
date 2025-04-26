@@ -29,7 +29,7 @@
       <!-- Post preview-->
       {% for post in all_posts %}
       <div class="post-preview">
-        <a style="text-decoration: none" href="{{ url_for('routes.show_post', post_id=post.id) }}">
+        <a style="text-decoration: none" href="{{ url_for('routes.view_post', post_id=post.id) }}">
           <h2 class="post-title">{{ post.title }}</h2>
           <h3 class="post-subtitle">{{ post.subtitle }}</h3>
           {% if post.summary %}
@@ -40,10 +40,10 @@
         </a>
         <p class="post-meta">
           Posted by
-          <a href={{ url_for('routes.about') }}>{{ post.author["username"] }}</a>
+          <a href={{ url_for('routes.profile_page', user_id=post.author.id) }}>{{ post.author["username"] }}</a>
           on {{post.date}}
           <!-- Only show delete button if user id is 1 (admin user) -->
-          {% if current_user.get_id() == "1" %}
+          {% if current_user.role == "admin" %}
             <a href="{{url_for('routes.delete_post', post_id=post.id) }}">✘</a>
           {% endif %}
         </p>
@@ -53,8 +53,7 @@
       {% endfor %}
 
       <!-- New Post -->
-      <!-- Only show Create Post button if user id is 1 (admin user) -->
-      {% if current_user.get_id() == "1" %}
+      {% if current_user.role == "admin" %}
           <div class="d-flex justify-content-end mb-4">
             <a
               class="btn btn-primary float-right"

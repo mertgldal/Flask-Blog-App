@@ -15,3 +15,7 @@ class BlogPost(db.Model):
 
     # New feature for summary with AI
     summary = db.Column(db.Text, nullable=True)
+
+    # New feature for view count and avg_read_time
+    views = db.Column(db.Integer, default=0)
+    avg_read_time = db.Column(db.Float, default=0.0)  # In minutes
